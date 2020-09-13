@@ -1,3 +1,4 @@
+USE Central;
 DELETE FROM Hosts;
 
 #TODO Better classification and Description everything is a (server/Desktop/Loadbalancer?) / Messaging-RabbitMQ
@@ -14,4 +15,5 @@ INSERT INTO Hosts (Environment, Type, Purpose, HostName, Description) VALUES
 ('DEV', 'Desktop', 'Personal', '127.0.0.1', 'Hostname looks like an IP Address but that is what is returned by HttpServletRequest.getRemoteHost().'),
 ('DEV', 'Desktop', 'Developer-Box', '98.223.35.37', 'Saradhi Laptop Chicago'),
 ('DEV', 'Desktop', 'Developer-Box', '103.225.56.57', 'Saradhi Laptop Traveling'),
+('DEV', 'Desktop', 'Developer-Box', '99.245.217.37', 'Vamsi Laptop'),
 ('DEV', 'Desktop', 'Developer-Box', '24.1.204.80', 'Saradhi Laptop Chicago');

@@ -65,7 +65,7 @@ INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
 INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
 ('DEV', 'LoggingService', 'ControllerClassName', 'com.TBD.core.services.remoting.rabbit.FireAndForgetController'),
 ('DEV', 'LoggingService', 'HandlerClassName', 'com.TBD.core.services.remoting.rabbit.FireAndForgetHandler'),
-('DEV', 'LoggingService', 'RequestCreatorClassName', 'com.TBD.backbone.services.LoggingRequestCreator'),
+('DEV', 'LoggingService', 'RequestCreatorClassName', 'com.TBD.backbone.services.logging.LoggingRequestCreator'),
 ('DEV', 'LoggingService', 'ControllerDecrypterClassName', 'com.TBD.core.util.central.CentralDecrypter'),
 ('DEV', 'LoggingService', 'ControllerDecrypterAuthorizationId', '25b51747-62b7-4da3-b4f6-75d51c944a90'),
 ('DEV', 'LoggingService', 'HandlerDecrypterClassName', 'com.TBD.core.util.central.CentralDecrypter'),
