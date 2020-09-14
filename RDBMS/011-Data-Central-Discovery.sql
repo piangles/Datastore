@@ -45,7 +45,7 @@ INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
 INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
 ('DEV', 'CryptoService', 'ControllerClassName', 'com.TBD.core.services.remoting.rabbit.ReqRespController'),
 ('DEV', 'CryptoService', 'HandlerClassName', 'com.TBD.core.services.remoting.rabbit.ReqRespHandler'),
-('DEV', 'CryptoService', 'RequestCreatorClassName', 'com.TBD.backbone.services.CryptoServiceRequestCreator'),
+('DEV', 'CryptoService', 'RequestCreatorClassName', 'com.TBD.backbone.services.crypto.CryptoServiceRequestCreator'),
 ('DEV', 'CryptoService', 'ControllerDecrypterClassName', 'com.TBD.core.util.central.CentralDecrypter'),
 ('DEV', 'CryptoService', 'ControllerDecrypterAuthorizationId', '1c044b37-9388-4e6b-baf2-9fe09dea4281'),
 ('DEV', 'CryptoService', 'HandlerDecrypterClassName', 'com.TBD.core.util.central.CentralDecrypter'),

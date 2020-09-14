@@ -6,7 +6,7 @@ INSERT INTO Config (ApplicationId, ComponentId, ComponentDescription, Name, Valu
 ('LoggingService', '14fe64ea-d15a-4c8b-af2f-f2c7efe1943b', 'LoggingServiceDAO', 'LoginId', 'kj5IPCk6oWkmxezE9yWh3Q=='),
 ('LoggingService', '14fe64ea-d15a-4c8b-af2f-f2c7efe1943b', 'LoggingServiceDAO', 'Password', 'bSU2ekVvuinOQTa/ywH7kg=='),
 ('LoggingService', '14fe64ea-d15a-4c8b-af2f-f2c7efe1943b', 'LoggingServiceDAO', 'URL', 'jdbc:mysql://elektos.cty8sfgs1evu.us-east-1.rds.amazonaws.com:3306/'),
-('LoggingService', '14fe64ea-d15a-4c8b-af2f-f2c7efe1943b', 'LoggingServiceDAO', 'DecrypterClassName', 'com.TBD.backbone.services.DefaultDecrypter'),
+('LoggingService', '14fe64ea-d15a-4c8b-af2f-f2c7efe1943b', 'LoggingServiceDAO', 'DecrypterClassName', 'com.TBD.backbone.services.crypto.DefaultDecrypter'),
 ('LoggingService', '14fe64ea-d15a-4c8b-af2f-f2c7efe1943b', 'LoggingServiceDAO', 'DecrypterAuthorizationId', 'e04202bc-a88e-48be-8b38-b94399d3086a');
 
 
