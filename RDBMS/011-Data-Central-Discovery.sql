@@ -140,6 +140,25 @@ INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
 ('DEV', 'UserPreferenceService', 'Topic', 'UserPreferenceServiceTopic'),
 ('DEV', 'UserPreferenceService', 'TimeOut', '5000');
 
+INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
+('DEV', 'ControlChannelService', 'ControllerClassName', 'com.TBD.core.services.remoting.rabbit.ReqRespController'),
+('DEV', 'ControlChannelService', 'HandlerClassName', 'com.TBD.core.services.remoting.rabbit.ReqRespHandler'),
+('DEV', 'ControlChannelService', 'RequestCreatorClassName', 'com.TBD.core.services.remoting.handlers.DefaultRequestCreator'),
+('DEV', 'ControlChannelService', 'ControllerDecrypterClassName', 'com.TBD.core.util.central.CentralDecrypter'),
+('DEV', 'ControlChannelService', 'ControllerDecrypterAuthorizationId', '1d89530c-50b4-4f5a-af91-5f5ebb45ef47'),
+('DEV', 'ControlChannelService', 'HandlerDecrypterClassName', 'com.TBD.core.util.central.CentralDecrypter'),
+('DEV', 'ControlChannelService', 'HandlerDecrypterAuthorizationId', 'ba0b6173-b7ca-43e7-aee0-163233282403'),
+('DEV', 'ControlChannelService', 'DecoderClassName', 'com.TBD.core.util.coding.JavaDecoder'),
+('DEV', 'ControlChannelService', 'EncoderClassName', 'com.TBD.core.util.coding.JavaEncoder'),
+('DEV', 'ControlChannelService', 'SessionValidatorClassName', 'com.TBD.backbone.services.session.DefaultSessionValidator'),
+('DEV', 'ControlChannelService', 'PredeterminedSessionId', 'TODOSessionId'),
+('DEV', 'ControlChannelService', 'RMQHostName', 'ec2-54-172-250-220.compute-1.amazonaws.com'),
+('DEV', 'ControlChannelService', 'RMQPort', '5672'),
+('DEV', 'ControlChannelService', 'RMQLoginId', 'TdmVTwllpL3hE+HyDz1ScA=='),
+('DEV', 'ControlChannelService', 'RMQPassword', 'Fh9b3EQmSW4uIzXDNqSNYw=='),
+('DEV', 'ControlChannelService', 'Topic', 'ControlChannelServiceTopic'),
+('DEV', 'ControlChannelService', 'TimeOut', '5000');
+
 #GatewayService
 INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
 ('DEV', 'GatewayService', 'PredeterminedSessionId', 'TODOSessionId');
