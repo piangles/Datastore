@@ -2,6 +2,6 @@ USE Backbone;
 DELETE FROM ControlChannel;
 
 INSERT INTO ControlChannel (TypeName, TypeValue, Topic) VALUES
-('UserId', '7014b086', 'com.TBD.controlchannel.users'),
-('Alias', 'Energy', 'com.TBD.sector.energy'),
-('Alias', 'Technology', 'com.TBD.sector.tech');
+('UserId', '7014b086', 'org.piangles.controlchannel.users'),
+('Alias', 'Energy', 'org.piangles.sector.energy'),
+('Alias', 'Technology', 'org.piangles.sector.tech');
