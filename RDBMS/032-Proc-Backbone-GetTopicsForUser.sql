@@ -10,6 +10,6 @@ CREATE PROCEDURE GetTopicsForUser
 BEGIN
 	#call DebugLog(ComponentId);
 	
-    SELECT Topic from ControlChannel cc WHERE cc.TypeName = 'UserId' AND cc.TypeValue = UserId;
+    SELECT Topic from Messaging msg WHERE msg.TypeName = 'UserId' AND msg.TypeValue = UserId;
 END //
 DELIMITER ;

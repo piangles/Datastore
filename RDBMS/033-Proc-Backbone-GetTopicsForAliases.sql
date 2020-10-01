@@ -10,6 +10,6 @@ CREATE PROCEDURE GetTopicsForAliases
 BEGIN
 	#call DebugLog(ComponentId);
 	
-    SELECT Topic from ControlChannel cc WHERE cc.TypeName = 'Alias' AND FIND_IN_SET(cc.TypeValue, aliasArray);
+    SELECT Topic from Messaging msg WHERE msg.TypeName = 'Alias' AND FIND_IN_SET(msg.TypeValue, aliasArray);
 END //
 DELIMITER ;

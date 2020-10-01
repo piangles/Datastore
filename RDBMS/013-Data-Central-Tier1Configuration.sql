@@ -13,4 +13,6 @@ INSERT INTO Tier1Configuration (Environment, ServiceName, Name, Value) VALUES
 ('DEV', 'CryptoService', 'Password', 'bSU2ekVvuinOQTa/ywH7kg=='),
 ('DEV', 'CryptoService', 'URL', 'jdbc:mysql://elektos.cty8sfgs1evu.us-east-1.rds.amazonaws.com:3306/'),
 ('DEV', 'CryptoService', 'DecrypterClassName', 'org.piangles.core.util.central.CentralDecrypter'),
-('DEV', 'CryptoService', 'DecrypterAuthorizationId', 'a9e422d3-a2b8-4ae8-9f7d-e266bd3b9637');
+('DEV', 'CryptoService', 'DecrypterAuthorizationId', 'a9e422d3-a2b8-4ae8-9f7d-e266bd3b9637'),
+
+('DEV', 'SessionService', 'LoggingService', 'TODOSessionId');

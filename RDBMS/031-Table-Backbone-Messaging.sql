@@ -1,6 +1,6 @@
 USE Backbone;
-DROP TABLE IF EXISTS ControlChannel;
-CREATE TABLE ControlChannel //TODO this has be changed.
+DROP TABLE IF EXISTS Messaging;
+CREATE TABLE Messaging #TODO this has be changed.
 (
 	PartitionNo INT(32) UNSIGNED NOT NULL AUTO_INCREMENT,
 	TypeName varchar(25)  NOT NULL,
@@ -9,5 +9,5 @@ CREATE TABLE ControlChannel //TODO this has be changed.
 	
 	InsertedTS TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	UpdatedTS TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    KEY(Id) -- combo???
+    KEY(PartitionNo)
 );

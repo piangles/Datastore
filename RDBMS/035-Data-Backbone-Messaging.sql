@@ -1,7 +1,7 @@
 USE Backbone;
-DELETE FROM ControlChannel;
+DELETE FROM Messaging;
 
-INSERT INTO ControlChannel (TypeName, TypeValue, Topic) VALUES
+INSERT INTO Messaging (TypeName, TypeValue, Topic) VALUES
 ('UserId', '7014b086', 'org.piangles.controlchannel.users'),
 ('Alias', 'Energy', 'org.piangles.sector.energy'),
 ('Alias', 'Technology', 'org.piangles.sector.tech');
