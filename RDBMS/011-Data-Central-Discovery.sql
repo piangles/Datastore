@@ -141,23 +141,23 @@ INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
 ('DEV', 'UserPreferenceService', 'TimeOut', '5000');
 
 INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
-('DEV', 'ControlChannelService', 'ControllerClassName', 'org.piangles.core.services.remoting.rabbit.ReqRespController'),
-('DEV', 'ControlChannelService', 'HandlerClassName', 'org.piangles.core.services.remoting.rabbit.ReqRespHandler'),
-('DEV', 'ControlChannelService', 'RequestCreatorClassName', 'org.piangles.core.services.remoting.handlers.DefaultRequestCreator'),
-('DEV', 'ControlChannelService', 'ControllerDecrypterClassName', 'org.piangles.core.util.central.CentralDecrypter'),
-('DEV', 'ControlChannelService', 'ControllerDecrypterAuthorizationId', '1d89530c-50b4-4f5a-af91-5f5ebb45ef47'),
-('DEV', 'ControlChannelService', 'HandlerDecrypterClassName', 'org.piangles.core.util.central.CentralDecrypter'),
-('DEV', 'ControlChannelService', 'HandlerDecrypterAuthorizationId', 'ba0b6173-b7ca-43e7-aee0-163233282403'),
-('DEV', 'ControlChannelService', 'DecoderClassName', 'org.piangles.core.util.coding.JavaDecoder'),
-('DEV', 'ControlChannelService', 'EncoderClassName', 'org.piangles.core.util.coding.JavaEncoder'),
-('DEV', 'ControlChannelService', 'SessionValidatorClassName', 'org.piangles.backbone.services.session.DefaultSessionValidator'),
-('DEV', 'ControlChannelService', 'PredeterminedSessionId', 'TODOSessionId'),
-('DEV', 'ControlChannelService', 'RMQHostName', 'ec2-54-172-250-220.compute-1.amazonaws.com'),
-('DEV', 'ControlChannelService', 'RMQPort', '5672'),
-('DEV', 'ControlChannelService', 'RMQLoginId', 'TdmVTwllpL3hE+HyDz1ScA=='),
-('DEV', 'ControlChannelService', 'RMQPassword', 'Fh9b3EQmSW4uIzXDNqSNYw=='),
-('DEV', 'ControlChannelService', 'Topic', 'ControlChannelServiceTopic'),
-('DEV', 'ControlChannelService', 'TimeOut', '5000');
+('DEV', 'MessagingService', 'ControllerClassName', 'org.piangles.core.services.remoting.rabbit.ReqRespController'),
+('DEV', 'MessagingService', 'HandlerClassName', 'org.piangles.core.services.remoting.rabbit.ReqRespHandler'),
+('DEV', 'MessagingService', 'RequestCreatorClassName', 'org.piangles.core.services.remoting.handlers.DefaultRequestCreator'),
+('DEV', 'MessagingService', 'ControllerDecrypterClassName', 'org.piangles.core.util.central.CentralDecrypter'),
+('DEV', 'MessagingService', 'ControllerDecrypterAuthorizationId', '1d89530c-50b4-4f5a-af91-5f5ebb45ef47'),
+('DEV', 'MessagingService', 'HandlerDecrypterClassName', 'org.piangles.core.util.central.CentralDecrypter'),
+('DEV', 'MessagingService', 'HandlerDecrypterAuthorizationId', 'ba0b6173-b7ca-43e7-aee0-163233282403'),
+('DEV', 'MessagingService', 'DecoderClassName', 'org.piangles.core.util.coding.JavaDecoder'),
+('DEV', 'MessagingService', 'EncoderClassName', 'org.piangles.core.util.coding.JavaEncoder'),
+('DEV', 'MessagingService', 'SessionValidatorClassName', 'org.piangles.backbone.services.session.DefaultSessionValidator'),
+('DEV', 'MessagingService', 'PredeterminedSessionId', 'TODOSessionId'),
+('DEV', 'MessagingService', 'RMQHostName', 'ec2-54-172-250-220.compute-1.amazonaws.com'),
+('DEV', 'MessagingService', 'RMQPort', '5672'),
+('DEV', 'MessagingService', 'RMQLoginId', 'TdmVTwllpL3hE+HyDz1ScA=='),
+('DEV', 'MessagingService', 'RMQPassword', 'Fh9b3EQmSW4uIzXDNqSNYw=='),
+('DEV', 'MessagingService', 'Topic', 'ControlChannelServiceTopic'),
+('DEV', 'MessagingService', 'TimeOut', '5000');
 
 #GatewayService
 INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
