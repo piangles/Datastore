@@ -1,6 +1,6 @@
 USE Backbone;
 
-DELETE FROM Config WHERE ComponentId IN ('5d435fe2-7e54-43c3-84d2-8f4addf2dac9');
+DELETE FROM Config WHERE ComponentId IN ('5d435fe2-7e54-43c3-84d2-8f4addf2dac9', 'fd5f51bc-5a14-4675-9df4-982808bb106b');
 
 INSERT INTO Config (ApplicationId, ComponentId, ComponentDescription, Name, Value) VALUES
 ('MessagingService', '5d435fe2-7e54-43c3-84d2-8f4addf2dac9', 'ControlChannelServiceDAO', 'DriverClassName', 'com.mysql.jdbc.Driver'),
@@ -18,5 +18,10 @@ INSERT INTO Config (ApplicationId, ComponentId, ComponentDescription, Name, Valu
 ('MessagingService', 'fd5f51bc-5a14-4675-9df4-982808bb106b', 'KafkaProducer', 'linger.ms', '1'),
 ('MessagingService', 'fd5f51bc-5a14-4675-9df4-982808bb106b', 'KafkaProducer', 'buffer.memory', '33554432'),
 ('MessagingService', 'fd5f51bc-5a14-4675-9df4-982808bb106b', 'KafkaProducer', 'key.serializer', 'org.apache.kafka.common.serialization.StringSerializer'),
-('MessagingService', 'fd5f51bc-5a14-4675-9df4-982808bb106b', 'KafkaProducer', 'value.serializer', 'org.apache.kafka.common.serialization.StringSerializer');
+('MessagingService', 'fd5f51bc-5a14-4675-9df4-982808bb106b', 'KafkaProducer', 'value.serializer', 'org.apache.kafka.common.serialization.StringSerializer'),
+('MessagingService', 'fd5f51bc-5a14-4675-9df4-982808bb106b', 'KafkaConsumer', 'auto.offset.reset', 'earliest'),
+('MessagingService', 'fd5f51bc-5a14-4675-9df4-982808bb106b', 'KafkaProducer', 'key.deserializer', 'org.apache.kafka.common.serialization.StringDeserializer'),
+('MessagingService', 'fd5f51bc-5a14-4675-9df4-982808bb106b', 'KafkaProducer', 'value.deserializer', 'org.apache.kafka.common.serialization.StringDeserializer');
+
+
 #('MessagingService', 'fd5f51bc-5a14-4675-9df4-982808bb106b', 'KafkaProducer', 'partitioner.class', 'org.piangles.playground.kafka.CustomPartitioner')

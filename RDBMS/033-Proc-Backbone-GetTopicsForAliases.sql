@@ -10,6 +10,6 @@ CREATE PROCEDURE GetTopicsForAliases
 BEGIN
 	#call DebugLog(ComponentId);
 	
-    SELECT Topic from Messaging msg WHERE msg.TypeName = 'Alias' AND FIND_IN_SET(msg.TypeValue, aliasArray);
+    SELECT Topic, PartitionNo from MessagingAliases msg WHERE FIND_IN_SET(msg.Alias, aliasArray);
 END //
 DELIMITER ;
