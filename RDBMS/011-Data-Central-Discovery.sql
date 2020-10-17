@@ -58,7 +58,7 @@ INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
 ('DEV', 'CryptoService', 'RMQPort', '5672'),
 ('DEV', 'CryptoService', 'RMQLoginId', 'TdmVTwllpL3hE+HyDz1ScA=='),
 ('DEV', 'CryptoService', 'RMQPassword', 'Fh9b3EQmSW4uIzXDNqSNYw=='),
-('DEV', 'CryptoService', 'Topic', 'CryptoServiceTopic'),
+('DEV', 'CryptoService', 'Topic', 'CryptoServiceReqRespTopic'),
 ('DEV', 'CryptoService', 'TimeOut', '5000');
 
 #Tier 2
@@ -78,7 +78,7 @@ INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
 ('DEV', 'LoggingService', 'RMQPort', '5672'),
 ('DEV', 'LoggingService', 'RMQLoginId', 'TdmVTwllpL3hE+HyDz1ScA=='),
 ('DEV', 'LoggingService', 'RMQPassword', 'Fh9b3EQmSW4uIzXDNqSNYw=='),
-('DEV', 'LoggingService', 'Topic', 'LoggingServiceTopic'),
+('DEV', 'LoggingService', 'Topic', 'LoggingServiceFireAndForgetTopic'),
 ('DEV', 'LoggingService', 'TimeOut', '5000');
 
 #Tier 3
@@ -98,7 +98,7 @@ INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
 ('DEV', 'IdService', 'RMQPort', '5672'),
 ('DEV', 'IdService', 'RMQLoginId', 'TdmVTwllpL3hE+HyDz1ScA=='),
 ('DEV', 'IdService', 'RMQPassword', 'Fh9b3EQmSW4uIzXDNqSNYw=='),
-('DEV', 'IdService', 'Topic', 'IdServiceTopic'),
+('DEV', 'IdService', 'Topic', 'IdServiceReqRespTopic'),
 ('DEV', 'IdService', 'TimeOut', '5000');
 
 #Tier 4
@@ -118,7 +118,7 @@ INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
 ('DEV', 'AuthenticationService', 'RMQPort', '5672'),
 ('DEV', 'AuthenticationService', 'RMQLoginId', 'TdmVTwllpL3hE+HyDz1ScA=='),
 ('DEV', 'AuthenticationService', 'RMQPassword', 'Fh9b3EQmSW4uIzXDNqSNYw=='),
-('DEV', 'AuthenticationService', 'Topic', 'AuthenticationServiceTopic'),
+('DEV', 'AuthenticationService', 'Topic', 'AuthenticationServiceReqRespTopic'),
 ('DEV', 'AuthenticationService', 'TimeOut', '5000');
 
 INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
@@ -137,7 +137,7 @@ INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
 ('DEV', 'UserPreferenceService', 'RMQPort', '5672'),
 ('DEV', 'UserPreferenceService', 'RMQLoginId', 'TdmVTwllpL3hE+HyDz1ScA=='),
 ('DEV', 'UserPreferenceService', 'RMQPassword', 'Fh9b3EQmSW4uIzXDNqSNYw=='),
-('DEV', 'UserPreferenceService', 'Topic', 'UserPreferenceServiceTopic'),
+('DEV', 'UserPreferenceService', 'Topic', 'UserPreferenceServiceReqRespTopic'),
 ('DEV', 'UserPreferenceService', 'TimeOut', '5000');
 
 INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
@@ -156,7 +156,7 @@ INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
 ('DEV', 'MessagingService', 'RMQPort', '5672'),
 ('DEV', 'MessagingService', 'RMQLoginId', 'TdmVTwllpL3hE+HyDz1ScA=='),
 ('DEV', 'MessagingService', 'RMQPassword', 'Fh9b3EQmSW4uIzXDNqSNYw=='),
-('DEV', 'MessagingService', 'Topic', 'ControlChannelServiceTopic'),
+('DEV', 'MessagingService', 'Topic', 'MessagingServiceReqRespTopic'),
 ('DEV', 'MessagingService', 'TimeOut', '5000');
 
 INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
@@ -175,7 +175,7 @@ INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
 ('DEV', 'UserProfileService', 'RMQPort', '5672'),
 ('DEV', 'UserProfileService', 'RMQLoginId', 'TdmVTwllpL3hE+HyDz1ScA=='),
 ('DEV', 'UserProfileService', 'RMQPassword', 'Fh9b3EQmSW4uIzXDNqSNYw=='),
-('DEV', 'UserProfileService', 'Topic', 'UserProfileServiceTopic'),
+('DEV', 'UserProfileService', 'Topic', 'UserProfileServiceReqRespTopic'),
 ('DEV', 'UserProfileService', 'TimeOut', '5000');
 
 
