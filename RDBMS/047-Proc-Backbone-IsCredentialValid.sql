@@ -11,19 +11,19 @@ CREATE PROCEDURE IsCredentialValid
 	OUT UserId VARCHAR(25),
 	OUT NoOfAttempts INT,
 	OUT IsToken BOOLEAN,
-	OUT Active BOOLEAN
+	OUT IsActive BOOLEAN
 ) 
 this_proc: BEGIN
 	DECLARE Found BOOLEAN DEFAULT false;
 	#call DebugLog(ComponentId);
 
 	#Retrieve account is locked or MaxTries reached
-	SELECT cred.Active, cred.NoOfAttempts INTO Active, NoOfAttempts 
+	SELECT cred.Active, cred.NoOfAttempts INTO IsActive, NoOfAttempts 
 	FROM Credentials cred 
 	WHERE cred.LoginId = LoginId;
 	
 	#If max tries reached return, the user will have to generate token(again)
-	IF Active = false OR NoOfAttempts > MaxAttempts THEN
+	IF IsActive = false OR NoOfAttempts > MaxAttempts THEN
 		LEAVE this_proc;
 	END IF;
 	
