@@ -40,6 +40,12 @@ this_proc: BEGIN
 		WHERE cred.LoginId = LoginId 
 		AND cred.Token = PasswordOrToken  
 		AND cred.TokenExpirationTime >= CURRENT_TIMESTAMP();
+		
+		IF Found = true THEN
+			UPDATE Credentials cred
+				SET cred.Password = '' 
+			WHERE cred.LoginId = LoginId;
+		END IF;
 	END IF;	
 	
 	#Update NoOfAttempts accordingly
