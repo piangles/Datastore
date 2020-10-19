@@ -39,7 +39,7 @@ this_proc: BEGIN
 		FROM Credentials cred 
 		WHERE cred.LoginId = LoginId 
 		AND cred.Token = PasswordOrToken  
-		AND cred.TokenExpirationTime <= CURRENT_TIMESTAMP();
+		AND cred.TokenExpirationTime >= CURRENT_TIMESTAMP();
 	END IF;	
 	
 	#Update NoOfAttempts accordingly
