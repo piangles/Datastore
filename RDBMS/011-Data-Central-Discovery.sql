@@ -143,7 +143,7 @@ INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
 INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
 ('DEV', 'MessagingService', 'ControllerClassName', 'org.piangles.core.services.remoting.rabbit.ReqRespController'),
 ('DEV', 'MessagingService', 'HandlerClassName', 'org.piangles.core.services.remoting.rabbit.ReqRespHandler'),
-('DEV', 'MessagingService', 'RequestCreatorClassName', 'org.piangles.core.services.remoting.handlers.DefaultRequestCreator'),
+('DEV', 'MessagingService', 'RequestCreatorClassName', 'org.piangles.backbone.services.msg.MessagingRequestCreator'),
 ('DEV', 'MessagingService', 'ControllerDecrypterClassName', 'org.piangles.core.util.central.CentralDecrypter'),
 ('DEV', 'MessagingService', 'ControllerDecrypterAuthorizationId', '1d89530c-50b4-4f5a-af91-5f5ebb45ef47'),
 ('DEV', 'MessagingService', 'HandlerDecrypterClassName', 'org.piangles.core.util.central.CentralDecrypter'),
