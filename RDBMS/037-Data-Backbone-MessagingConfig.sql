@@ -21,7 +21,5 @@ INSERT INTO Config (ApplicationId, ComponentId, ComponentDescription, Name, Valu
 ('MessagingService', 'fd5f51bc-5a14-4675-9df4-982808bb106b', 'KafkaProducer', 'value.serializer', 'org.apache.kafka.common.serialization.StringSerializer'),
 ('MessagingService', 'fd5f51bc-5a14-4675-9df4-982808bb106b', 'KafkaConsumer', 'auto.offset.reset', 'earliest'),
 ('MessagingService', 'fd5f51bc-5a14-4675-9df4-982808bb106b', 'KafkaProducer', 'key.deserializer', 'org.apache.kafka.common.serialization.StringDeserializer'),
-('MessagingService', 'fd5f51bc-5a14-4675-9df4-982808bb106b', 'KafkaProducer', 'value.deserializer', 'org.apache.kafka.common.serialization.StringDeserializer');
-
-
-#('MessagingService', 'fd5f51bc-5a14-4675-9df4-982808bb106b', 'KafkaProducer', 'partitioner.class', 'org.piangles.playground.kafka.CustomPartitioner')
+('MessagingService', 'fd5f51bc-5a14-4675-9df4-982808bb106b', 'KafkaProducer', 'value.deserializer', 'org.apache.kafka.common.serialization.StringDeserializer'),
+('MessagingService', 'fd5f51bc-5a14-4675-9df4-982808bb106b', 'KafkaProducer', 'partitioner.class', 'org.piangles.backbone.services.msg.CustomPartitioner');
