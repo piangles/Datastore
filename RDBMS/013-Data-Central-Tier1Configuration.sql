@@ -1,3 +1,4 @@
+USE Central;
 DELETE FROM Tier1Configuration;
 
 INSERT INTO Tier1Configuration (Environment, ServiceName, Name, Value) VALUES
@@ -15,4 +16,14 @@ INSERT INTO Tier1Configuration (Environment, ServiceName, Name, Value) VALUES
 ('DEV', 'CryptoService', 'DecrypterClassName', 'org.piangles.core.util.central.CentralDecrypter'),
 ('DEV', 'CryptoService', 'DecrypterAuthorizationId', 'a9e422d3-a2b8-4ae8-9f7d-e266bd3b9637'),
 
-('DEV', 'SessionService', 'LoggingService', 'TODOSessionId');
+('DEV', 'SessionManagementService', 'SessionTimeout', '60'),
+('DEV', 'SessionManagementService', 'AllowMultipleSessions', 'false'),
+('DEV', 'SessionManagementService', 'ManagedService0', 'LoggingService'),
+('DEV', 'SessionManagementService', 'ManagedService1', 'UserPreferenceService'),
+('DEV', 'SessionManagementService', 'ManagedService2', 'GatewayService'),
+('DEV', 'SessionManagementService', 'ManagedService3', 'AuthenticationService'),
+('DEV', 'SessionManagementService', 'ManagedService4', 'MessagingService'),
+('DEV', 'SessionManagementService', 'ManagedService5', 'IdService'),
+('DEV', 'SessionManagementService', 'ManagedService6', 'UserProfileService'),
+('DEV', 'SessionManagementService', 'ManagedService7', 'NewsReporter'),
+('DEV', 'SessionManagementService', 'ManagedService8', 'PricingService');

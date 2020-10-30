@@ -11,6 +11,9 @@ CREATE PROCEDURE GetTopicsForEntities
 BEGIN
 	#call DebugLog(ComponentId);
 	
-    SELECT Topic, PartitionNo from MessagingEntities msg WHERE msg.TypeName = EntityType AND  FIND_IN_SET(msg.TypeValue, entityIdArray);
+    SELECT entities.Topic, entities.PartitionNo,  topicDetails.Compacted
+	FROM MessagingEntities entities 
+	LEFT JOIN MessagingTopicDetails topicDetails ON
+	entities.TypeName = EntityType AND  FIND_IN_SET(entities.TypeValue, entityIdArray)  AND entities.Topic = topicDetails.Topic;
 END //
 DELIMITER ;

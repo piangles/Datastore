@@ -9,6 +9,6 @@ CREATE PROCEDURE GetPartitionerAlgorithmForTopics
 BEGIN
 	#call DebugLog(ComponentId);
 	
-    SELECT Topic, PartitionerAlgorithm from MessagingTopics msg;
+    SELECT Topic, PartitionerAlgorithm from MessagingTopicDetails;
 END //
 DELIMITER ;

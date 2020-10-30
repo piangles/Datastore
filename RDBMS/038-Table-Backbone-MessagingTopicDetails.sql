@@ -1,11 +1,12 @@
 USE Backbone;
-DROP TABLE IF EXISTS MessagingTopics;
-CREATE TABLE MessagingTopics
+DROP TABLE IF EXISTS MessagingTopicDetails;
+CREATE TABLE MessagingTopicDetails
 (
 	Id INT(32) UNSIGNED NOT NULL AUTO_INCREMENT,
 	
-	Topic varchar(150)  NOT NULL,
-	PartitionerAlgorithm varchar(50)  NOT NULL,
+	Topic VARCHAR(150)  NOT NULL,
+	PartitionerAlgorithm VARCHAR(50)  NOT NULL,
+	Compacted BOOLEAN NOT NULL DEFAULT false,
 
 	InsertedTS TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	UpdatedTS TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
