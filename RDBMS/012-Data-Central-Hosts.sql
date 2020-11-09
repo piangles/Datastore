@@ -6,9 +6,15 @@ INSERT INTO Hosts (Environment, Type, Purpose, HostName, Description) VALUES
 ('DEV', 'Server', 'Messaging', 'ec2-54-172-250-220.compute-1.amazonaws.com', 'Messaging Server currently only RabbitMQ'),
 ('DEV', 'Server', 'Database', 'elektos.cty8sfgs1evu.us-east-1.rds.amazonaws.com', 'MySql Database'),
 
+#Old CentralServer Configuration
 ('DEV', 'Server', 'CentralServer', 'ec2-52-23-185-3.compute-1.amazonaws.com', 'Single instance of Central Server'),
 ('DEV', 'Server', 'CentralServer', '172.31.35.139', 'IP Address of Central Server when called internally'),
 
+#New CentralServer Configuration
+('DEV', 'Server', 'CentralServer', 'ec2-34-227-152-93.compute-1.amazonaws.com', 'Single instance of Central Server'),
+('DEV', 'Server', 'CentralServer', '172.31.54.215', 'IP Address of Central Server when called internally'),
+
+#Docker based BackboneServer Configuration
 ('DEV', 'Server', 'BackboneServer', 'ec2-18-233-156-246.compute-1.amazonaws.com', 'Backbone & PiAngles.com services Server'),
 ('DEV', 'Server', 'BackboneServer', '172.31.57.71', 'IP Address of of Backbone Server when called internally'),
 
