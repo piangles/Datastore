@@ -9,7 +9,7 @@ INSERT INTO Config (ApplicationId, ComponentId, ComponentDescription, Name, Valu
 #('LoggingService', '14fe64ea-d15a-4c8b-af2f-f2c7efe1943b', 'LoggingServiceDAO', 'DecrypterClassName', 'org.piangles.backbone.services.crypto.DefaultDecrypter'),
 #('LoggingService', '14fe64ea-d15a-4c8b-af2f-f2c7efe1943b', 'LoggingServiceDAO', 'DecrypterAuthorizationId', 'e04202bc-a88e-48be-8b38-b94399d3086a');
 
-('LoggingService', '14fe64ea-d15a-4c8b-af2f-f2c7efe1943b', 'LoggingServiceDAO', 'DAOType', 'Mongo'),
+('LoggingService', '14fe64ea-d15a-4c8b-af2f-f2c7efe1943b', 'LoggingServiceDAO', 'DAOType', 'NoSql'),
 ('LoggingService', '14fe64ea-d15a-4c8b-af2f-f2c7efe1943b', 'LoggingServiceDAO', 'LoginId', 'wyRvtg/TqZoNR9Gpxsk5Cg=='),
 ('LoggingService', '14fe64ea-d15a-4c8b-af2f-f2c7efe1943b', 'LoggingServiceDAO', 'Password', 'bSU2ekVvuinOQTa/ywH7kg=='),
 ('LoggingService', '14fe64ea-d15a-4c8b-af2f-f2c7efe1943b', 'LoggingServiceDAO', 'HostAddress', 'ec2-34-202-160-243.compute-1.amazonaws.com:27017'),
