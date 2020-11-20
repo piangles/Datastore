@@ -18,6 +18,7 @@ INSERT INTO Tier1Configuration (Environment, ServiceName, Name, Value) VALUES
 
 ('DEV', 'SessionManagementService', 'SessionTimeout', '300'),
 ('DEV', 'SessionManagementService', 'AllowMultipleSessions', 'true'),
+('DEV', 'SessionManagementService', 'MaxSessionCount', '2'),
 ('DEV', 'SessionManagementService', 'ManagedService0', 'LoggingService'),
 ('DEV', 'SessionManagementService', 'ManagedService1', 'UserPreferenceService'),
 ('DEV', 'SessionManagementService', 'ManagedService2', 'GatewayService'),
