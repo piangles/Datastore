@@ -1,18 +1,21 @@
 USE Backbone;
-DROP PROCEDURE IF EXISTS CreateCredentialEntry;
+DROP PROCEDURE IF EXISTS CreateUserProfile;
 
 DELIMITER //
 
-CREATE PROCEDURE CreateCredentialEntry
+CREATE PROCEDURE CreateUserProfile
 (
 	IN UserId VARCHAR(25),
-	IN LoginId VARCHAR(250),
-	IN Password VARCHAR(100)
+	IN FirstName VARCHAR(50),
+	IN LastName VARCHAR(50),
+	IN EMailId VARCHAR(250),
+	IN PhoneNo VARCHAR(25)
 ) 
 BEGIN
 	#call DebugLog(ComponentId);
-	
-    INSERT INTO Credentials (UserId, LoginId, Password)
-    VALUES (UserId, LoginId, Password);
+
+	INSERT INTO UserProfile (UserId, FirstName, LastName, EMailId, PhoneNo)
+	VALUES (UserId, FirstName, LastName, EMailId, PhoneNo);
+    
 END //
 DELIMITER ;

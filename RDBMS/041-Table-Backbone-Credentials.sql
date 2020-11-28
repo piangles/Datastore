@@ -4,10 +4,10 @@ CREATE TABLE Credentials
 (
 	Id INT(32) UNSIGNED NOT NULL AUTO_INCREMENT,
 	
-	UserId varchar(25)  NOT NULL  PRIMARY KEY,
-	LoginId varchar(250)  NOT NULL,
-	Password varchar(100)  NOT NULL,
-	Token varchar(100),
+	UserId VARCHAR(25)  NOT NULL  PRIMARY KEY,
+	LoginId VARCHAR(250)  NULL,
+	Password VARCHAR(100) NULL,
+	Token VARCHAR(100) NULL,
 	TokenExpirationTime TIMESTAMP,
 	
 	NoOfAttempts INT NOT NULL DEFAULT 1,
