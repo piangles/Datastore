@@ -22,6 +22,10 @@ INSERT INTO Hosts (Environment, Type, Purpose, HostName, Description) VALUES
 ('DEV', 'Server', 'PiAngles.com', 'ec2-54-175-25-129.compute-1.amazonaws.com', 'PiAngles.com Server'),
 ('DEV', 'Server', 'PiAngles.com', '172.31.55.95', 'IP Address PiAngles.com Server when called internally'),
 
+#TrufflePig.co and Demo Services
+('DEV', 'Server', 'TrufflePig.co', 'ec2-18-212-212-242.compute-1.amazonaws.com', 'TrufflePig.co Server'),
+('DEV', 'Server', 'TrufflePig.co', '172.31.33.163', 'IP Address TrufflePig.co Server when called internally'),
+
 #Developer Workstations
 ('DEV', 'Desktop', 'Developer-Box', '127.0.0.1', 'Hostname looks like an IP Address but that is what is returned by HttpServletRequest.getRemoteHost().'),
 ('DEV', 'Desktop', 'Developer-Box', '98.223.35.37', 'Saradhi Laptop Chicago'),

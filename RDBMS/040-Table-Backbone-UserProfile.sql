@@ -1,3 +1,4 @@
+//Roll back the constrains
 USE Backbone;
 DROP TABLE IF EXISTS UserProfile;
 CREATE TABLE UserProfile

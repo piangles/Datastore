@@ -10,7 +10,7 @@ CREATE PROCEDURE RetrieveUserProfile
 BEGIN
 	#call DebugLog(ComponentId);
 
-	SELECT UserId, FirstName, LastName, EMailId FROM UserProfile up
+	SELECT UserId, FirstName, LastName, EMailId, PhoneNo FROM UserProfile up
 	WHERE up.UserId = UserId;
     
 END //
