@@ -1,8 +1,24 @@
 USE Central;
 DELETE FROM Discovery;
 
-#Tier 1
+INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
+('DEV', 'FeaturesTestService', 'ControllerClassName', 'org.piangles.core.services.remoting.rabbit.ReqRespController'),
+('DEV', 'FeaturesTestService', 'HandlerClassName', 'org.piangles.core.services.remoting.rabbit.ReqRespHandler'),
+('DEV', 'FeaturesTestService', 'RequestCreatorClassName', 'org.piangles.core.services.remoting.handlers.DefaultRequestCreator'),
+('DEV', 'FeaturesTestService', 'DecoderClassName', 'org.piangles.core.util.coding.JavaDecoder'),
+('DEV', 'FeaturesTestService', 'EncoderClassName', 'org.piangles.core.util.coding.JavaEncoder'),
+('DEV', 'FeaturesTestService', 'SessionValidatorClassName', 'org.piangles.backbone.services.session.PassThruSessionValidator'),
+('DEV', 'FeaturesTestService', 'PreApprovedSessionId', 'TODOSessionId'),
+('DEV', 'FeaturesTestService', 'RMQHostName', 'ec2-100-25-191-222.compute-1.amazonaws.com'),
+('DEV', 'FeaturesTestService', 'RMQPort', '5672'),
+('DEV', 'FeaturesTestService', 'RMQLoginId', 'TdmVTwllpL3hE+HyDz1ScA=='),
+('DEV', 'FeaturesTestService', 'RMQPassword', 'Fh9b3EQmSW4uIzXDNqSNYw=='),
+('DEV', 'FeaturesTestService', 'DecrypterClassName', 'org.piangles.core.util.central.CentralDecrypter'),
+('DEV', 'FeaturesTestService', 'DecrypterAuthorizationId', '3ba7c57e-0747-4da7-a85d-14daa39d3932'),
+('DEV', 'FeaturesTestService', 'Topic', 'FeaturesTestServiceReqRespTopic'),
+('DEV', 'FeaturesTestService', 'TimeOut', '5000');
 
+#Tier 1
 INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
 ('DEV', 'SessionManagementService', 'ControllerClassName', 'org.piangles.core.services.remoting.rabbit.ReqRespController'),
 ('DEV', 'SessionManagementService', 'HandlerClassName', 'org.piangles.core.services.remoting.rabbit.ReqRespHandler'),
@@ -20,7 +36,6 @@ INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
 ('DEV', 'SessionManagementService', 'Topic', 'SessionManagementServiceReqRespTopic'),
 ('DEV', 'SessionManagementService', 'TimeOut', '5000');
 
-#Tier 1
 INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
 ('DEV', 'ConfigService', 'ControllerClassName', 'org.piangles.core.services.remoting.rabbit.ReqRespController'),
 ('DEV', 'ConfigService', 'HandlerClassName', 'org.piangles.core.services.remoting.rabbit.ReqRespHandler'),
@@ -55,7 +70,7 @@ INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
 ('DEV', 'CryptoService', 'Topic', 'CryptoServiceReqRespTopic'),
 ('DEV', 'CryptoService', 'TimeOut', '5000');
 
-#Tier 2
+#Rest of the Backbone Services 
 INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
 ('DEV', 'LoggingService', 'ControllerClassName', 'org.piangles.core.services.remoting.rabbit.FireAndForgetController'),
 ('DEV', 'LoggingService', 'HandlerClassName', 'org.piangles.core.services.remoting.rabbit.FireAndForgetHandler'),
@@ -73,7 +88,6 @@ INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
 ('DEV', 'LoggingService', 'Topic', 'LoggingServiceFireAndForgetTopic'),
 ('DEV', 'LoggingService', 'TimeOut', '5000');
 
-#Tier 3
 INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
 ('DEV', 'IdService', 'ControllerClassName', 'org.piangles.core.services.remoting.rabbit.ReqRespController'),
 ('DEV', 'IdService', 'HandlerClassName', 'org.piangles.core.services.remoting.rabbit.ReqRespHandler'),
@@ -91,7 +105,6 @@ INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
 ('DEV', 'IdService', 'Topic', 'IdServiceReqRespTopic'),
 ('DEV', 'IdService', 'TimeOut', '5000');
 
-#Tier 4
 INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
 ('DEV', 'AuthenticationService', 'ControllerClassName', 'org.piangles.core.services.remoting.rabbit.ReqRespController'),
 ('DEV', 'AuthenticationService', 'HandlerClassName', 'org.piangles.core.services.remoting.rabbit.ReqRespHandler'),
