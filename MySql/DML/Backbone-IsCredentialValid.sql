@@ -14,6 +14,8 @@ CREATE PROCEDURE IsCredentialValid
 	OUT IsActive BOOLEAN
 ) 
 this_proc: BEGIN
+	//TODO Fix this Found variable and also if the loginId is not even found currently returning \"AccountDisabled\\\"
+	//TODO Enabled / Active
 	DECLARE Found BOOLEAN DEFAULT false;
 	#call DebugLog(ComponentId);
 

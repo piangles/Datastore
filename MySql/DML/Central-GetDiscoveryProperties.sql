@@ -11,10 +11,12 @@ CREATE PROCEDURE GetDiscoveryProperties
 BEGIN
 	DECLARE Environment VARCHAR(3);
     
+	#Check if the Host is authorized need a separate point or return value.
 	SELECT hosts.Environment into Environment FROM Hosts hosts WHERE hosts.HostName=HostName;
 
 	#call DebugLog(Environment);
 	
+	#If Properties are not set handle it.
     SELECT Name, Value from Discovery discovery WHERE discovery.Environment = Environment and discovery.ServiceName = ServiceName;
 END //
 DELIMITER ;

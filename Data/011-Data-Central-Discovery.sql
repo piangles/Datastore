@@ -37,23 +37,6 @@ INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
 ('DEV', 'SessionManagementService', 'TimeOut', '5000');
 
 INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
-('DEV', 'ConfigService', 'ControllerClassName', 'org.piangles.core.services.remoting.rabbit.ReqRespController'),
-('DEV', 'ConfigService', 'HandlerClassName', 'org.piangles.core.services.remoting.rabbit.ReqRespHandler'),
-('DEV', 'ConfigService', 'RequestCreatorClassName', 'org.piangles.core.services.remoting.handlers.AuditableRequestCreator'),
-('DEV', 'ConfigService', 'DecoderClassName', 'org.piangles.core.util.coding.JavaDecoder'),
-('DEV', 'ConfigService', 'EncoderClassName', 'org.piangles.core.util.coding.JavaEncoder'),
-('DEV', 'ConfigService', 'SessionValidatorClassName', 'org.piangles.backbone.services.session.DefaultSessionValidator'),
-('DEV', 'ConfigService', 'PreApprovedSessionId', 'TODOSessionId'),
-('DEV', 'ConfigService', 'RMQHostName', 'ec2-100-25-191-222.compute-1.amazonaws.com'),
-('DEV', 'ConfigService', 'RMQPort', '5672'),
-('DEV', 'ConfigService', 'RMQLoginId', 'TdmVTwllpL3hE+HyDz1ScA=='),
-('DEV', 'ConfigService', 'RMQPassword', 'Fh9b3EQmSW4uIzXDNqSNYw=='),
-('DEV', 'ConfigService', 'DecrypterClassName', 'org.piangles.core.util.central.CentralDecrypter'),
-('DEV', 'ConfigService', 'DecrypterAuthorizationId', '6e3c9a60-4404-43a1-9702-1f3344bd06f1'),
-('DEV', 'ConfigService', 'Topic', 'ConfigServiceReqRespTopic'),
-('DEV', 'ConfigService', 'TimeOut', '5000');
-
-INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
 ('DEV', 'CryptoService', 'ControllerClassName', 'org.piangles.core.services.remoting.rabbit.ReqRespController'),
 ('DEV', 'CryptoService', 'HandlerClassName', 'org.piangles.core.services.remoting.rabbit.ReqRespHandler'),
 ('DEV', 'CryptoService', 'RequestCreatorClassName', 'org.piangles.backbone.services.crypto.CryptoServiceRequestCreator'),
@@ -69,6 +52,23 @@ INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
 ('DEV', 'CryptoService', 'DecrypterAuthorizationId', '3466d438-4830-4d1a-847c-1a1e87612e9e'),
 ('DEV', 'CryptoService', 'Topic', 'CryptoServiceReqRespTopic'),
 ('DEV', 'CryptoService', 'TimeOut', '5000');
+
+INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
+('DEV', 'ConfigService', 'ControllerClassName', 'org.piangles.core.services.remoting.rabbit.ReqRespController'),
+('DEV', 'ConfigService', 'HandlerClassName', 'org.piangles.core.services.remoting.rabbit.ReqRespHandler'),
+('DEV', 'ConfigService', 'RequestCreatorClassName', 'org.piangles.core.services.remoting.handlers.AuditableRequestCreator'),
+('DEV', 'ConfigService', 'DecoderClassName', 'org.piangles.core.util.coding.JavaDecoder'),
+('DEV', 'ConfigService', 'EncoderClassName', 'org.piangles.core.util.coding.JavaEncoder'),
+('DEV', 'ConfigService', 'SessionValidatorClassName', 'org.piangles.backbone.services.session.DefaultSessionValidator'),
+('DEV', 'ConfigService', 'PreApprovedSessionId', 'TODOSessionId'),
+('DEV', 'ConfigService', 'RMQHostName', 'ec2-100-25-191-222.compute-1.amazonaws.com'),
+('DEV', 'ConfigService', 'RMQPort', '5672'),
+('DEV', 'ConfigService', 'RMQLoginId', 'TdmVTwllpL3hE+HyDz1ScA=='),
+('DEV', 'ConfigService', 'RMQPassword', 'Fh9b3EQmSW4uIzXDNqSNYw=='),
+('DEV', 'ConfigService', 'DecrypterClassName', 'org.piangles.core.util.central.CentralDecrypter'),
+('DEV', 'ConfigService', 'DecrypterAuthorizationId', '6e3c9a60-4404-43a1-9702-1f3344bd06f1'),
+('DEV', 'ConfigService', 'Topic', 'ConfigServiceReqRespTopic'),
+('DEV', 'ConfigService', 'TimeOut', '5000');
 
 #Rest of the Backbone Services 
 INSERT INTO Discovery (Environment, ServiceName, Name, Value) VALUES
