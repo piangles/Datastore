@@ -77,8 +77,8 @@ CREATE TABLE Backbone.Config
 );
 
 CREATE TRIGGER update_updated_timestamp BEFORE INSERT OR UPDATE ON Backbone.Config FOR EACH ROW EXECUTE PROCEDURE  public.update_updated_timestamp();
-DROP TABLE IF EXISTS Backbone.Config;
-CREATE TABLE Backbone.Config
+DROP TABLE IF EXISTS BackboneAudit.Config;
+CREATE TABLE BackboneAudit.Config
 (
 	Id SERIAL NOT NULL PRIMARY KEY,
 	InsertedTS TIMESTAMP NOT NULL DEFAULT NOW(),
@@ -94,8 +94,8 @@ CREATE TABLE Backbone.Config
 	LineNumber varchar(10) NOT NULL,
 	StackTrace varchar(32000)  NOT NULL
 );
-DROP TABLE IF EXISTS Backbone.Crypto;
-CREATE TABLE Backbone.Crypto
+DROP TABLE IF EXISTS BackboneAudit.Crypto;
+CREATE TABLE BackboneAudit.Crypto
 (
 	Id SERIAL NOT NULL PRIMARY KEY,
 	InsertedTS TIMESTAMP NOT NULL DEFAULT NOW(),
