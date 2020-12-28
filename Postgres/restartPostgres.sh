@@ -1,10 +1,10 @@
 #!/bin/bash
 
-docker stop demo_piangles
+docker stop piangles
 
-docker image build -t demo_piangles .
+docker image build -t piangles .
 
-docker container run -p 5432:5432 --rm -it --name demo_piangles demo_piangles 
+docker container run -p 5432:5432 --rm -it --name piangles piangles 
 
 sleep 5
 
