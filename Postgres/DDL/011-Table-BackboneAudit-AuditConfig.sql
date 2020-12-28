@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS Backbone.Config;
-CREATE TABLE Backbone.Config
+DROP TABLE IF EXISTS BackboneAudit.Config;
+CREATE TABLE BackboneAudit.Config
 (
 	Id SERIAL NOT NULL PRIMARY KEY,
 	InsertedTS TIMESTAMP NOT NULL DEFAULT NOW(),

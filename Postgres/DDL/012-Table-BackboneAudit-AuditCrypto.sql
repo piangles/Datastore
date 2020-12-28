@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS Backbone.Crypto;
-CREATE TABLE Backbone.Crypto
+DROP TABLE IF EXISTS BackboneAudit.Crypto;
+CREATE TABLE BackboneAudit.Crypto
 (
 	Id SERIAL NOT NULL PRIMARY KEY,
 	InsertedTS TIMESTAMP NOT NULL DEFAULT NOW(),
