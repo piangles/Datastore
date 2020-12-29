@@ -1,14 +1,16 @@
-DROP PROCEDURE IF EXISTS Backbone.GetTopicDetails;
+DROP FUNCTION IF EXISTS Backbone.GetTopicDetails;
 
-CREATE PROCEDURE Backbone.GetTopicDetails
+CREATE FUNCTION Backbone.GetTopicDetails
 (
-	IN Topic VARCHAR(250)
-) 
+	IN pTopic VARCHAR(250)
+)
+RETURNS TABLE(	Topic VARCHAR(150), PartitionerAlgorithm VARCHAR(50), Compacted BOOLEAN)
 AS $$
 BEGIN
 	
+	RETURN QUERY
     SELECT topicDetails.Topic, topicDetails.PartitionerAlgorithm, topicDetails.Compacted 
-    FROM MessagingTopicDetails topicDetails
-    WHERE topicDetails.Topic = Topic;
+    FROM Backbone.MessagingTopicDetails topicDetails
+    WHERE topicDetails.Topic = pTopic;
 END
 $$ LANGUAGE plpgsql;
