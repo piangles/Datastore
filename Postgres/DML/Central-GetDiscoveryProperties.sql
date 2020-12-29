@@ -1,10 +1,11 @@
-DROP PROCEDURE IF EXISTS Central.GetDiscoveryProperties;
+DROP FUNCTION IF EXISTS Central.GetDiscoveryProperties;
 
-CREATE PROCEDURE Central.GetDiscoveryProperties 
+CREATE FUNCTION Central.GetDiscoveryProperties 
 (
 	IN pHostName VARCHAR(255),
 	IN pServiceName VARCHAR(255)
 ) 
+RETURNS TABLE (Name VARCHAR(250), Value VARCHAR(1000))
 AS $$
 	DECLARE vEnvironment VARCHAR(3);
 BEGIN
@@ -15,6 +16,7 @@ BEGIN
 	--call DebugLog(Environment);
 	
 	--If Properties are not set handle it.
+    RETURN QUERY 
     SELECT discovery.Name, discovery.Value FROM Central.Discovery discovery WHERE discovery.Environment = vEnvironment and discovery.ServiceName = pServiceName;
 END
 $$ LANGUAGE plpgsql;
