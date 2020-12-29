@@ -709,8 +709,7 @@ BEGIN
 	WHERE up.UserId = UserId;
     
 END
-$$ LANGUAGE plpgsql;--DIFFERENT ISSUE
-DROP PROCEDURE IF EXISTS Central.GetDiscoveryProperties;
+$$ LANGUAGE plpgsql;DROP PROCEDURE IF EXISTS Central.GetDiscoveryProperties;
 
 CREATE PROCEDURE Central.GetDiscoveryProperties 
 (
@@ -722,15 +721,14 @@ AS $$
 BEGIN
     
 	--Check if the Host is authorized need a separate point or return value.
-	SELECT Environment into Environment FROM Hosts hosts WHERE hosts.HostName=HostName;
+	SELECT Environment INTO Central.Environment FROM Hosts hosts WHERE hosts.HostName=HostName;
 
 	--call DebugLog(Environment);
 	
 	--If Properties are not set handle it.
-    SELECT Name, Value from Discovery discovery WHERE discovery.Environment = Environment and discovery.ServiceName = ServiceName;
+    SELECT Name, Value FROM Central.Discovery discovery WHERE discovery.Environment = Environment and discovery.ServiceName = ServiceName;
 END
-$$ LANGUAGE plpgsql;--DIFFERENT ISSUE
-DROP PROCEDURE IF EXISTS Central.GetTier1Configuration;
+$$ LANGUAGE plpgsql;DROP PROCEDURE IF EXISTS Central.GetTier1Configuration;
 
 CREATE PROCEDURE Central.GetTier1Configuration 
 (
@@ -741,11 +739,11 @@ AS $$
 	DECLARE Environment VARCHAR(3);
 BEGIN
     
-	SELECT hosts.Environment into Environment FROM Hosts hosts WHERE hosts.HostName=HostName;
+	SELECT hosts.Environment INTO Environment FROM Central.Hosts hosts WHERE hosts.HostName=HostName;
 
 	--call DebugLog(Environment);
 	
-    SELECT Name, Value from Tier1Configuration tier1Config WHERE tier1Config.Environment = Environment and tier1Config.ServiceName = ServiceName;
+    SELECT Name, Value FROM Central.Tier1Configuration tier1Config WHERE tier1Config.Environment = Environment and tier1Config.ServiceName = ServiceName;
 END
 $$ LANGUAGE plpgsql;DROP PROCEDURE IF EXISTS Central.InsertAuditCentral;
 
@@ -761,7 +759,7 @@ CREATE PROCEDURE Central.InsertAuditCentral
 AS $$
 BEGIN
 
-	INSERT INTO AuditCentral
+	INSERT INTO Central.AuditCentral
 	(
 		RemoteAddress,
 		RemoteHost,
@@ -802,17 +800,17 @@ AS $$
 		Environment VARCHAR(3);
 
 BEGIN
-	SELECT hosts.Environment into Environment FROM Hosts hosts WHERE hosts.HostName=HostName;
+	SELECT hosts.Environment into Environment FROM Central.Hosts hosts WHERE hosts.HostName=HostName;
 
 	--call DebugLog(Environment);
 	IF EncryptedCategory = 'Discovery' THEN
-		SELECT COUNT(*) INTO EncryptedRowCount FROM Discovery discovery  WHERE 
+		SELECT COUNT(*) INTO EncryptedRowCount FROM Central.Discovery discovery  WHERE 
 		discovery.Environment = Environment and 
 		discovery.ServiceName = ServiceName and
 		discovery.Name = EncryptedValueName and
 		discovery.Value = EncryptedValue;
 
-		SELECT COUNT(*) INTO CipherRowCount FROM Discovery discovery  WHERE 
+		SELECT COUNT(*) INTO CipherRowCount FROM Central.Discovery discovery  WHERE 
 		discovery.Environment = Environment and 
 		discovery.ServiceName = ServiceName and
 		discovery.Name = CipherAuthorizationIdName and
@@ -820,13 +818,13 @@ BEGIN
 		
 		RowCount := EncryptedRowCount + CipherRowCount;
     ELSEIF EncryptedCategory = 'Configuration' THEN
-    	SELECT COUNT(*) INTO EncryptedRowCount FROM Tier1Configuration tier1Config WHERE 
+    	SELECT COUNT(*) INTO EncryptedRowCount FROM Central.Tier1Configuration tier1Config WHERE 
 		tier1Config.Environment = Environment and 
 		tier1Config.ServiceName = ServiceName and    	
 		tier1Config.Name = EncryptedValueName and
 		tier1Config.Value = EncryptedValue;
 		
-		SELECT COUNT(*) INTO CipherRowCount FROM Tier1Configuration tier1Config WHERE 
+		SELECT COUNT(*) INTO CipherRowCount FROM Central.Tier1Configuration tier1Config WHERE 
 		tier1Config.Environment = Environment and 
 		tier1Config.ServiceName = ServiceName and
 		tier1Config.Name = CipherAuthorizationIdName and
