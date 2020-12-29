@@ -10,7 +10,7 @@ AS $$
 BEGIN
     
 	--Check if the Host is authorized need a separate point or return value.
-	SELECT Environment INTO Central.Environment FROM Hosts hosts WHERE hosts.HostName=HostName;
+	SELECT Environment INTO Environment FROM Central.Hosts hosts WHERE hosts.HostName=HostName;
 
 	--call DebugLog(Environment);
 	
