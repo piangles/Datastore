@@ -12,7 +12,7 @@ CREATE PROCEDURE Central.InsertAuditCentral
 AS $$
 BEGIN
 
-	INSERT INTO AuditCentral
+	INSERT INTO Central.AuditCentral
 	(
 		RemoteAddress,
 		RemoteHost,
