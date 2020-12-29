@@ -291,27 +291,30 @@ BEGIN
     
 END
 $$ LANGUAGE plpgsql;
-DROP PROCEDURE IF EXISTS Backbone.GetConfiguration;
+DROP FUNCTION IF EXISTS Backbone.GetConfiguration;
 
-CREATE PROCEDURE Backbone.GetConfiguration 
+CREATE FUNCTION Backbone.GetConfiguration 
 (
-	IN ComponentId VARCHAR(255)
+	IN pComponentId VARCHAR(255)
 )
+RETURNS TABLE (Name VARCHAR(250), Value VARCHAR(1000))
 AS $$
 BEGIN
 	
-    SELECT Name, Value from Config config WHERE config.ComponentId = ComponentId;
+	RETURN QUERY
+    SELECT config.Name, config.Value FROM Backbone.Config config WHERE config.ComponentId = pComponentId;
 END
 $$ LANGUAGE plpgsql;
-DROP PROCEDURE IF EXISTS Backbone.GetPartitionerAlgorithmForTopics;
+DROP FUNCTION IF EXISTS Backbone.GetPartitionerAlgorithmForTopics;
 
-CREATE PROCEDURE Backbone.GetPartitionerAlgorithmForTopics
+CREATE FUNCTION Backbone.GetPartitionerAlgorithmForTopics
 (
 )
+RETURNS TABLE(Topic VARCHAR(150), PartitionerAlgorithm VARCHAR(50))
 AS $$
 BEGIN
-	
-    SELECT Topic, PartitionerAlgorithm from MessagingTopicDetails;
+	RETURN QUERY
+    SELECT mtd.Topic, mtd.PartitionerAlgorithm FROM Backbone.MessagingTopicDetails mtd;
 END
 $$ LANGUAGE plpgsql;DROP PROCEDURE IF EXISTS Backbone.GetTopicDetails;
 
@@ -730,13 +733,14 @@ BEGIN
     RETURN QUERY 
     SELECT discovery.Name, discovery.Value FROM Central.Discovery discovery WHERE discovery.Environment = vEnvironment and discovery.ServiceName = pServiceName;
 END
-$$ LANGUAGE plpgsql;DROP PROCEDURE IF EXISTS Central.GetTier1Configuration;
+$$ LANGUAGE plpgsql;DROP FUNCTION IF EXISTS Central.GetTier1Configuration;
 
-CREATE PROCEDURE Central.GetTier1Configuration 
+CREATE FUNCTION Central.GetTier1Configuration 
 (
 	IN pHostName VARCHAR(255),
 	IN pServiceName VARCHAR(255)
 ) 
+RETURNS TABLE (Name VARCHAR(250), Value VARCHAR(1000))
 AS $$
 	DECLARE vEnvironment VARCHAR(3);
 BEGIN
@@ -744,8 +748,10 @@ BEGIN
 	SELECT hosts.Environment INTO vEnvironment FROM Central.Hosts hosts WHERE hosts.HostName=pHostName;
 
 	--call DebugLog(Environment);
-	
-    SELECT Name, Value FROM Central.Tier1Configuration tier1Config WHERE tier1Config.Environment = vEnvironment and tier1Config.ServiceName = pServiceName;
+	RETURN QUERY
+    SELECT tier1Config.Name, tier1Config.Value FROM Central.Tier1Configuration tier1Config 
+    WHERE 
+    tier1Config.Environment = vEnvironment and tier1Config.ServiceName = pServiceName;
 END
 $$ LANGUAGE plpgsql;DROP PROCEDURE IF EXISTS Central.InsertAuditCentral;
 
