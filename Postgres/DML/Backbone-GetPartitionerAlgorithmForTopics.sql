@@ -1,11 +1,12 @@
-DROP PROCEDURE IF EXISTS Backbone.GetPartitionerAlgorithmForTopics;
+DROP FUNCTION IF EXISTS Backbone.GetPartitionerAlgorithmForTopics;
 
-CREATE PROCEDURE Backbone.GetPartitionerAlgorithmForTopics
+CREATE FUNCTION Backbone.GetPartitionerAlgorithmForTopics
 (
 )
+RETURNS TABLE(Topic VARCHAR(150), PartitionerAlgorithm VARCHAR(50))
 AS $$
 BEGIN
-	
-    SELECT Topic, PartitionerAlgorithm from MessagingTopicDetails;
+	RETURN QUERY
+    SELECT mtd.Topic, mtd.PartitionerAlgorithm FROM Backbone.MessagingTopicDetails mtd;
 END
 $$ LANGUAGE plpgsql;

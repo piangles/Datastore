@@ -1,12 +1,14 @@
-DROP PROCEDURE IF EXISTS Backbone.GetConfiguration;
+DROP FUNCTION IF EXISTS Backbone.GetConfiguration;
 
-CREATE PROCEDURE Backbone.GetConfiguration 
+CREATE FUNCTION Backbone.GetConfiguration 
 (
-	IN ComponentId VARCHAR(255)
+	IN pComponentId VARCHAR(255)
 )
+RETURNS TABLE (Name VARCHAR(250), Value VARCHAR(1000))
 AS $$
 BEGIN
 	
-    SELECT Name, Value from Config config WHERE config.ComponentId = ComponentId;
+	RETURN QUERY
+    SELECT config.Name, config.Value FROM Backbone.Config config WHERE config.ComponentId = pComponentId;
 END
 $$ LANGUAGE plpgsql;
