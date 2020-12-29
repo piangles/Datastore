@@ -3,53 +3,53 @@ DROP FUNCTION IF EXISTS Central.ValidateDecryptRequest;
 
 CREATE FUNCTION Central.ValidateDecryptRequest 
 (
-	IN HostName VARCHAR(255),
-	IN ServiceName VARCHAR(255),
-	IN EncryptedCategory VARCHAR(255), --Is it some Discovery Property or Config Property
-	IN EncryptedValueName VARCHAR(255),
-	IN EncryptedValue VARCHAR(255),
-	IN CipherAuthorizationIdName VARCHAR(255),
-	IN CipherAuthorizationId VARCHAR(255),
+	IN pHostName VARCHAR(255),
+	IN pServiceName VARCHAR(255),
+	IN pEncryptedCategory VARCHAR(255), --Is it some Discovery Property or Config Property
+	IN pEncryptedValueName VARCHAR(255),
+	IN pEncryptedValue VARCHAR(255),
+	IN pCipherAuthorizationIdName VARCHAR(255),
+	IN pCipherAuthorizationId VARCHAR(255),
 	OUT RowCount INT
 ) 
 AS $$
 	DECLARE 
-		EncryptedRowCount INT;
-		CipherRowCount INT;
-		Environment VARCHAR(3);
+		vEncryptedRowCount INT;
+		vCipherRowCount INT;
+		vEnvironment VARCHAR(3);
 
 BEGIN
-	SELECT hosts.Environment into Environment FROM Central.Hosts hosts WHERE hosts.HostName=HostName;
+	SELECT hosts.Environment into vEnvironment FROM Central.Hosts hosts WHERE hosts.HostName=pHostName;
 
 	--call DebugLog(Environment);
-	IF EncryptedCategory = 'Discovery' THEN
-		SELECT COUNT(*) INTO EncryptedRowCount FROM Central.Discovery discovery  WHERE 
-		discovery.Environment = Environment and 
-		discovery.ServiceName = ServiceName and
-		discovery.Name = EncryptedValueName and
-		discovery.Value = EncryptedValue;
+	IF pEncryptedCategory = 'Discovery' THEN
+		SELECT COUNT(*) INTO vEncryptedRowCount FROM Central.Discovery discovery  WHERE 
+		discovery.Environment = vEnvironment and 
+		discovery.ServiceName = pServiceName and
+		discovery.Name = pEncryptedValueName and
+		discovery.Value = pEncryptedValue;
 
-		SELECT COUNT(*) INTO CipherRowCount FROM Central.Discovery discovery  WHERE 
-		discovery.Environment = Environment and 
-		discovery.ServiceName = ServiceName and
-		discovery.Name = CipherAuthorizationIdName and
-		discovery.Value = CipherAuthorizationId;
+		SELECT COUNT(*) INTO vCipherRowCount FROM Central.Discovery discovery  WHERE 
+		discovery.Environment = vEnvironment and 
+		discovery.ServiceName = pServiceName and
+		discovery.Name = pCipherAuthorizationIdName and
+		discovery.Value = pCipherAuthorizationId;
 		
-		RowCount := EncryptedRowCount + CipherRowCount;
-    ELSEIF EncryptedCategory = 'Configuration' THEN
-    	SELECT COUNT(*) INTO EncryptedRowCount FROM Central.Tier1Configuration tier1Config WHERE 
-		tier1Config.Environment = Environment and 
-		tier1Config.ServiceName = ServiceName and    	
-		tier1Config.Name = EncryptedValueName and
-		tier1Config.Value = EncryptedValue;
+		RowCount := vEncryptedRowCount + vCipherRowCount;
+    ELSEIF pEncryptedCategory = 'Configuration' THEN
+    	SELECT COUNT(*) INTO vEncryptedRowCount FROM Central.Tier1Configuration tier1Config WHERE 
+		tier1Config.Environment = vEnvironment and 
+		tier1Config.ServiceName = pServiceName and    	
+		tier1Config.Name = pEncryptedValueName and
+		tier1Config.Value = pEncryptedValue;
 		
-		SELECT COUNT(*) INTO CipherRowCount FROM Central.Tier1Configuration tier1Config WHERE 
-		tier1Config.Environment = Environment and 
-		tier1Config.ServiceName = ServiceName and
-		tier1Config.Name = CipherAuthorizationIdName and
-		tier1Config.Value = CipherAuthorizationId;
+		SELECT COUNT(*) INTO vCipherRowCount FROM Central.Tier1Configuration tier1Config WHERE 
+		tier1Config.Environment = vEnvironment and 
+		tier1Config.ServiceName = pServiceName and
+		tier1Config.Name = pCipherAuthorizationIdName and
+		tier1Config.Value = pCipherAuthorizationId;
 		
-    	RowCount := EncryptedRowCount + CipherRowCount;
+    	RowCount := vEncryptedRowCount + vCipherRowCount;
 	END IF;
 	
 END
