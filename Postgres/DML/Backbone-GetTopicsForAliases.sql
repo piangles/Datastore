@@ -1,14 +1,16 @@
-DROP PROCEDURE IF EXISTS Backbone.GetTopicsForAliases;
+DROP FUNCTION IF EXISTS Backbone.GetTopicsForAliases;
 
-CREATE PROCEDURE Backbone.GetTopicsForAliases
+CREATE FUNCTION Backbone.GetTopicsForAliases
 (
-	IN aliasArray VARCHAR(250)
+	IN pAliasArray VARCHAR(250)
 ) 
+RETURNS TABLE(Topic VARCHAR(25), PartitionNo INT, Compacted BOOLEAN)
 AS $$
 BEGIN
 	
+	RETURN QUERY
 	SELECT alias.Topic, alias.PartitionNo, topicDetails.Compacted FROM 
-			MessagingAliases alias, MessagingTopicDetails topicDetails 
-	WHERE FIND_IN_SET(alias.Alias, aliasArray) and alias.Topic = topicDetails.Topic;
+			Backbone.MessagingAliases alias, Backbone.MessagingTopicDetails topicDetails 
+	WHERE alias.Alias = ANY (string_to_array(pAliasArray,','))  AND alias.Topic = topicDetails.Topic;
 END
 $$ LANGUAGE plpgsql;
