@@ -208,7 +208,7 @@ CREATE TABLE Backbone.UserProfile
 	FirstName varchar(50)  NOT NULL,
 	LastName varchar(50)  NOT NULL,
 	EMailId varchar(250)  NOT NULL,
-	PhoneNo varchar(25)  NOT NULL
+	PhoneNo varchar(25)
 );
 
 CREATE TRIGGER update_updated_timestamp BEFORE INSERT OR UPDATE ON Backbone.UserProfile FOR EACH ROW EXECUTE PROCEDURE  public.update_updated_timestamp();DROP TABLE IF EXISTS Backbone.Credentials;
@@ -254,7 +254,7 @@ CREATE PROCEDURE Backbone.CreateCredentialEntry
 AS $$
 BEGIN
 	
-    INSERT INTO Credentials (UserId, LoginId, Password)
+    INSERT INTO Backbone.Credentials (UserId, LoginId, Password)
     VALUES (UserId, LoginId, Password);
 END
 $$ LANGUAGE plpgsql;
@@ -280,13 +280,13 @@ CREATE PROCEDURE Backbone.CreateUserProfile
 	IN UserId VARCHAR(25),
 	IN FirstName VARCHAR(50),
 	IN LastName VARCHAR(50),
-	IN EMailId VARCHAR(250),
+	IN EMailId VARCHAR(250)
 	IN PhoneNo VARCHAR(25)
 ) 
 AS $$
 BEGIN
 
-	INSERT INTO UserProfile (UserId, FirstName, LastName, EMailId, PhoneNo)
+	INSERT INTO Backbone.UserProfile (UserId, FirstName, LastName, EMailId, PhoneNo)
 	VALUES (UserId, FirstName, LastName, EMailId, PhoneNo);
     
 END
@@ -316,18 +316,20 @@ BEGIN
 	RETURN QUERY
     SELECT mtd.Topic, mtd.PartitionerAlgorithm FROM Backbone.MessagingTopicDetails mtd;
 END
-$$ LANGUAGE plpgsql;DROP PROCEDURE IF EXISTS Backbone.GetTopicDetails;
+$$ LANGUAGE plpgsql;DROP FUNCTION IF EXISTS Backbone.GetTopicDetails;
 
-CREATE PROCEDURE Backbone.GetTopicDetails
+CREATE FUNCTION Backbone.GetTopicDetails
 (
-	IN Topic VARCHAR(250)
-) 
+	IN pTopic VARCHAR(250)
+)
+RETURNS TABLE(	Topic VARCHAR(150), PartitionerAlgorithm VARCHAR(50), Compacted BOOLEAN)
 AS $$
 BEGIN
 	
+	RETURN QUERY
     SELECT topicDetails.Topic, topicDetails.PartitionerAlgorithm, topicDetails.Compacted 
-    FROM MessagingTopicDetails topicDetails
-    WHERE topicDetails.Topic = Topic;
+    FROM Backbone.MessagingTopicDetails topicDetails
+    WHERE topicDetails.Topic = pTopic;
 END
 $$ LANGUAGE plpgsql;
 DROP PROCEDURE IF EXISTS Backbone.GetTopicsForAliases;
@@ -440,7 +442,7 @@ AS $$
 BEGIN
 
 
-	INSERT INTO Crypto
+	INSERT INTO BackboneAudit.Crypto
 	(
 		TraceId,
 		Action,
@@ -544,62 +546,62 @@ $$ LANGUAGE plpgsql;DROP FUNCTION IF EXISTS Backbone.IsCredentialValid;
 
 CREATE FUNCTION Backbone.IsCredentialValid
 (
-	IN LoginId VARCHAR(250),
-	IN PasswordOrToken VARCHAR(100),
-	IN MaxAttempts INT,
-	OUT UserId VARCHAR(25),
-	OUT NoOfAttempts INT,
-	OUT IsToken BOOLEAN,
-	OUT IsActive BOOLEAN
+	IN pLoginId VARCHAR(250),
+	IN pPasswordOrToken VARCHAR(100),
+	IN pMaxAttempts INT,
+	OUT pUserId VARCHAR(25),
+	OUT pNoOfAttempts INT,
+	OUT pIsToken BOOLEAN,
+	OUT pIsActive BOOLEAN
 )
 AS $$
 	--TODO Fix this Found variable and also if the loginId is not even found currently returning \"AccountDisabled\\\"
 	--TODO Enabled / Active
 	DECLARE 
-		Found BOOLEAN DEFAULT false;
+		vFound BOOLEAN DEFAULT false;
 BEGIN
 
 	--Retrieve account is locked or MaxTries reached
-	SELECT cred.Active, cred.NoOfAttempts INTO IsActive, NoOfAttempts 
-	FROM Credentials cred 
-	WHERE cred.LoginId = LoginId;
+	SELECT cred.Active, cred.NoOfAttempts INTO pIsActive, pNoOfAttempts 
+	FROM Backbone.Credentials cred 
+	WHERE cred.LoginId = pLoginId;
 	
 	--If max tries reached return, the user will have to generate token(again)
-	IF IsActive = false OR NoOfAttempts > MaxAttempts THEN
+	IF pIsActive = false OR pNoOfAttempts > pMaxAttempts THEN
 		RETURN;
 	END IF;
 	
 	--Check against the Password first
-	SELECT cred.UserId, true INTO UserId, Found
-	FROM Credentials cred 
-	WHERE cred.LoginId = LoginId 
-	AND cred.Password = PasswordOrToken;
+	SELECT cred.UserId, true INTO pUserId, vFound
+	FROM Backbone.Credentials cred 
+	WHERE cred.LoginId = pLoginId 
+	AND cred.Password = pPasswordOrToken;
 	
 	--Check against the Token
-	IF Found = false THEN 
-		SELECT cred.UserId, true, true INTO UserId, IsToken, Found 
-		FROM Credentials cred 
-		WHERE cred.LoginId = LoginId 
-		AND cred.Token = PasswordOrToken  
+	IF vFound = false THEN 
+		SELECT cred.UserId, true, true INTO pUserId, pIsToken, vFound 
+		FROM Backbone.Credentials cred 
+		WHERE cred.LoginId = pLoginId 
+		AND cred.Token = pPasswordOrToken  
 		AND cred.TokenExpirationTime >= CURRENT_TIMESTAMP;
 		
-		IF Found = true THEN
-			UPDATE Credentials cred
+		IF vFound = true THEN
+			UPDATE Backbone.Credentials cred
 				SET cred.Password = '' 
-			WHERE cred.LoginId = LoginId;
+			WHERE cred.LoginId = pLoginId;
 		END IF;
 	END IF;	
 	
 	--Update NoOfAttempts accordingly
-	IF Found = false THEN 
-		SELECT cred.NoOfAttempts + 1 INTO NoOfAttempts FROM Backbone.Credentials cred WHERE cred.LoginId = LoginId;
+	IF vFound = false THEN 
+		SELECT cred.NoOfAttempts + 1 INTO pNoOfAttempts FROM Backbone.Credentials cred WHERE cred.LoginId = pLoginId;
 	ELSE
-		SET NoOfAttempts = 1;
+		pNoOfAttempts := 1;
 	END IF;
 
-	UPDATE Credentials cred
-		SET cred.NoOfAttempts = NoOfAttempts 
-	WHERE cred.LoginId = LoginId;
+	UPDATE Backbone.Credentials cred
+		SET NoOfAttempts = pNoOfAttempts 
+	WHERE cred.LoginId = pLoginId;
 END
 $$ LANGUAGE plpgsql;DROP FUNCTION IF EXISTS Backbone.IsTokenBasedCredentialValid;
 
@@ -629,36 +631,45 @@ BEGIN
 	INSERT INTO UserPreferences (UserId, Properties) VALUES (UserId, Properties) ON CONFLICT(UserId) DO UPDATE
 	SET UserId = UserId, Properties = Properties;
 END
-$$ LANGUAGE plpgsql;DROP PROCEDURE IF EXISTS Backbone.RetrieveUserProfile;
+$$ LANGUAGE plpgsql;DROP FUNCTION IF EXISTS Backbone.RetrieveUserProfile;
 
-CREATE PROCEDURE Backbone.RetrieveUserProfile
+CREATE FUNCTION Backbone.RetrieveUserProfile
 (
-	IN UserId VARCHAR(25)
+	IN pUserId VARCHAR(25)
 ) 
+RETURNS TABLE
+(
+	UserId VARCHAR(25),
+	FirstName VARCHAR(50),
+	LastName VARCHAR(50),
+	EMailId VARCHAR(250),
+	PhoneNo VARCHAR(25)
+)
 AS $$
 BEGIN
 
-	SELECT UserId, FirstName, LastName, EMailId, PhoneNo FROM UserProfile up
-	WHERE up.UserId = UserId;
+	RETURN QUERY
+	SELECT up.UserId, up.FirstName, up.LastName, up.EMailId, up.PhoneNo FROM Backbone.UserProfile up
+	WHERE up.UserId = pUserId;
     
 END
 $$ LANGUAGE plpgsql;DROP FUNCTION IF EXISTS Backbone.SearchUserProfile;
 
 CREATE FUNCTION Backbone.SearchUserProfile
 (
-	IN EMailId VARCHAR(250),
-	IN PhoneNo VARCHAR(25),
-	OUT UserId VARCHAR(25)
+	IN pEMailId VARCHAR(250),
+	IN pPhoneNo VARCHAR(25),
+	OUT pUserId VARCHAR(25)
 ) 
 AS $$
 BEGIN
 
-	IF EMailId IS NOT NULL THEN
-		SELECT up.UserId INTO UserId FROM UserProfile up WHERE up.EMailId = EMailId;
+	IF pEMailId IS NOT NULL THEN
+		SELECT up.UserId INTO pUserId FROM Backbone.UserProfile up WHERE up.EMailId = pEMailId;
     END IF;
     
-	IF UserId IS NULL AND PhoneNo IS NOT NULL THEN
-		SELECT up.UserId INTO UserId FROM UserProfile up WHERE up.PhoneNo = PhoneNo;	
+	IF pUserId IS NULL AND pPhoneNo IS NOT NULL THEN
+		SELECT up.UserId INTO pUserId FROM Backbone.UserProfile up WHERE up.PhoneNo = pPhoneNo;	
 	END IF;
     
 END
@@ -698,18 +709,18 @@ $$ LANGUAGE plpgsql;DROP PROCEDURE IF EXISTS Backbone.UpdateUserProfile;
 
 CREATE PROCEDURE Backbone.UpdateUserProfile
 (
-	IN UserId VARCHAR(25),
-	IN FirstName VARCHAR(50),
-	IN LastName VARCHAR(50),
-	IN EMailId VARCHAR(250),
-	IN PhoneNo VARCHAR(25)
+	IN pUserId VARCHAR(25),
+	IN pFirstName VARCHAR(50),
+	IN pLastName VARCHAR(50),
+	IN pEMailId VARCHAR(250),
+	IN pPhoneNo VARCHAR(25)
 ) 
 AS $$
 BEGIN
 
-	UPDATE UserProfile up
-		SET up.FirstName = FirstName, up.LastName = LastName, up.EMailId = EMailId, up.PhoneNo = PhoneNo
-	WHERE up.UserId = UserId;
+	UPDATE Backbone.UserProfile up
+		SET FirstName = pFirstName, LastName = pLastName, EMailId = pEMailId, PhoneNo = pPhoneNo
+	WHERE UserId = pUserId;
     
 END
 $$ LANGUAGE plpgsql;DROP FUNCTION IF EXISTS Central.GetDiscoveryProperties;
