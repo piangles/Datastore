@@ -22,7 +22,7 @@ AS $$
 BEGIN
 
 
-	INSERT INTO Crypto
+	INSERT INTO BackboneAudit.Crypto
 	(
 		TraceId,
 		Action,

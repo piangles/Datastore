@@ -2,61 +2,61 @@ DROP FUNCTION IF EXISTS Backbone.IsCredentialValid;
 
 CREATE FUNCTION Backbone.IsCredentialValid
 (
-	IN LoginId VARCHAR(250),
-	IN PasswordOrToken VARCHAR(100),
-	IN MaxAttempts INT,
-	OUT UserId VARCHAR(25),
-	OUT NoOfAttempts INT,
-	OUT IsToken BOOLEAN,
-	OUT IsActive BOOLEAN
+	IN pLoginId VARCHAR(250),
+	IN pPasswordOrToken VARCHAR(100),
+	IN pMaxAttempts INT,
+	OUT pUserId VARCHAR(25),
+	OUT pNoOfAttempts INT,
+	OUT pIsToken BOOLEAN,
+	OUT pIsActive BOOLEAN
 )
 AS $$
 	--TODO Fix this Found variable and also if the loginId is not even found currently returning \"AccountDisabled\\\"
 	--TODO Enabled / Active
 	DECLARE 
-		Found BOOLEAN DEFAULT false;
+		vFound BOOLEAN DEFAULT false;
 BEGIN
 
 	--Retrieve account is locked or MaxTries reached
-	SELECT cred.Active, cred.NoOfAttempts INTO IsActive, NoOfAttempts 
-	FROM Credentials cred 
-	WHERE cred.LoginId = LoginId;
+	SELECT cred.Active, cred.NoOfAttempts INTO pIsActive, pNoOfAttempts 
+	FROM Backbone.Credentials cred 
+	WHERE cred.LoginId = pLoginId;
 	
 	--If max tries reached return, the user will have to generate token(again)
-	IF IsActive = false OR NoOfAttempts > MaxAttempts THEN
+	IF pIsActive = false OR pNoOfAttempts > pMaxAttempts THEN
 		RETURN;
 	END IF;
 	
 	--Check against the Password first
-	SELECT cred.UserId, true INTO UserId, Found
-	FROM Credentials cred 
-	WHERE cred.LoginId = LoginId 
-	AND cred.Password = PasswordOrToken;
+	SELECT cred.UserId, true INTO pUserId, vFound
+	FROM Backbone.Credentials cred 
+	WHERE cred.LoginId = pLoginId 
+	AND cred.Password = pPasswordOrToken;
 	
 	--Check against the Token
-	IF Found = false THEN 
-		SELECT cred.UserId, true, true INTO UserId, IsToken, Found 
-		FROM Credentials cred 
-		WHERE cred.LoginId = LoginId 
-		AND cred.Token = PasswordOrToken  
+	IF vFound = false THEN 
+		SELECT cred.UserId, true, true INTO pUserId, pIsToken, vFound 
+		FROM Backbone.Credentials cred 
+		WHERE cred.LoginId = pLoginId 
+		AND cred.Token = pPasswordOrToken  
 		AND cred.TokenExpirationTime >= CURRENT_TIMESTAMP;
 		
-		IF Found = true THEN
-			UPDATE Credentials cred
+		IF vFound = true THEN
+			UPDATE Backbone.Credentials cred
 				SET cred.Password = '' 
-			WHERE cred.LoginId = LoginId;
+			WHERE cred.LoginId = pLoginId;
 		END IF;
 	END IF;	
 	
 	--Update NoOfAttempts accordingly
-	IF Found = false THEN 
-		SELECT cred.NoOfAttempts + 1 INTO NoOfAttempts FROM Backbone.Credentials cred WHERE cred.LoginId = LoginId;
+	IF vFound = false THEN 
+		SELECT cred.NoOfAttempts + 1 INTO pNoOfAttempts FROM Backbone.Credentials cred WHERE cred.LoginId = pLoginId;
 	ELSE
-		SET NoOfAttempts = 1;
+		pNoOfAttempts := 1;
 	END IF;
 
-	UPDATE Credentials cred
-		SET cred.NoOfAttempts = NoOfAttempts 
-	WHERE cred.LoginId = LoginId;
+	UPDATE Backbone.Credentials cred
+		SET NoOfAttempts = pNoOfAttempts 
+	WHERE cred.LoginId = pLoginId;
 END
 $$ LANGUAGE plpgsql;

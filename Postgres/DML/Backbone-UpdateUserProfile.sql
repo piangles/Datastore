@@ -2,18 +2,18 @@ DROP PROCEDURE IF EXISTS Backbone.UpdateUserProfile;
 
 CREATE PROCEDURE Backbone.UpdateUserProfile
 (
-	IN UserId VARCHAR(25),
-	IN FirstName VARCHAR(50),
-	IN LastName VARCHAR(50),
-	IN EMailId VARCHAR(250),
-	IN PhoneNo VARCHAR(25)
+	IN pUserId VARCHAR(25),
+	IN pFirstName VARCHAR(50),
+	IN pLastName VARCHAR(50),
+	IN pEMailId VARCHAR(250),
+	IN pPhoneNo VARCHAR(25)
 ) 
 AS $$
 BEGIN
 
-	UPDATE UserProfile up
-		SET up.FirstName = FirstName, up.LastName = LastName, up.EMailId = EMailId, up.PhoneNo = PhoneNo
-	WHERE up.UserId = UserId;
+	UPDATE Backbone.UserProfile up
+		SET FirstName = pFirstName, LastName = pLastName, EMailId = pEMailId, PhoneNo = pPhoneNo
+	WHERE UserId = pUserId;
     
 END
 $$ LANGUAGE plpgsql;

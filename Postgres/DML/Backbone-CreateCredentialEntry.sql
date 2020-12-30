@@ -9,7 +9,7 @@ CREATE PROCEDURE Backbone.CreateCredentialEntry
 AS $$
 BEGIN
 	
-    INSERT INTO Credentials (UserId, LoginId, Password)
+    INSERT INTO Backbone.Credentials (UserId, LoginId, Password)
     VALUES (UserId, LoginId, Password);
 END
 $$ LANGUAGE plpgsql;

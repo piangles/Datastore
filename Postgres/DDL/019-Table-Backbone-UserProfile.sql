@@ -9,7 +9,7 @@ CREATE TABLE Backbone.UserProfile
 	FirstName varchar(50)  NOT NULL,
 	LastName varchar(50)  NOT NULL,
 	EMailId varchar(250)  NOT NULL,
-	PhoneNo varchar(25)  NOT NULL
+	PhoneNo varchar(25)
 );
 
 CREATE TRIGGER update_updated_timestamp BEFORE INSERT OR UPDATE ON Backbone.UserProfile FOR EACH ROW EXECUTE PROCEDURE  public.update_updated_timestamp();
