@@ -332,33 +332,38 @@ BEGIN
     WHERE topicDetails.Topic = pTopic;
 END
 $$ LANGUAGE plpgsql;
-DROP PROCEDURE IF EXISTS Backbone.GetTopicsForAliases;
+DROP FUNCTION IF EXISTS Backbone.GetTopicsForAliases;
 
-CREATE PROCEDURE Backbone.GetTopicsForAliases
+CREATE FUNCTION Backbone.GetTopicsForAliases
 (
-	IN aliasArray VARCHAR(250)
+	IN pAliasArray VARCHAR(250)
 ) 
+RETURNS TABLE(Topic VARCHAR(25), PartitionNo INT, Compacted BOOLEAN)
 AS $$
 BEGIN
 	
+	RETURN QUERY
 	SELECT alias.Topic, alias.PartitionNo, topicDetails.Compacted FROM 
-			MessagingAliases alias, MessagingTopicDetails topicDetails 
-	WHERE FIND_IN_SET(alias.Alias, aliasArray) and alias.Topic = topicDetails.Topic;
+			Backbone.MessagingAliases alias, Backbone.MessagingTopicDetails topicDetails 
+	WHERE alias.Alias = ANY (string_to_array(pAliasArray,','))  AND alias.Topic = topicDetails.Topic;
 END
-$$ LANGUAGE plpgsql;DROP PROCEDURE IF EXISTS Backbone.GetTopicsForEntities;
+$$ LANGUAGE plpgsql;DROP FUNCTION IF EXISTS Backbone.GetTopicsForEntities;
 
-CREATE PROCEDURE Backbone.GetTopicsForEntities
+CREATE FUNCTION Backbone.GetTopicsForEntities
 (
-	IN EntityType VARCHAR(20),
-	IN entityIdArray VARCHAR(250)
+	IN pEntityType VARCHAR(20),
+	IN pEntityIdArray VARCHAR(250)
 )
+RETURNS TABLE(Topic varchar(150), PartitionNo INT, Compacted BOOLEAN)
 AS $$
 BEGIN
 	
+	RETURN QUERY
     SELECT entities.Topic, entities.PartitionNo,  topicDetails.Compacted
-	FROM MessagingEntities entities 
-	LEFT JOIN MessagingTopicDetails topicDetails ON
-	entities.TypeName = EntityType AND  FIND_IN_SET(entities.TypeValue, entityIdArray)  AND entities.Topic = topicDetails.Topic;
+	FROM Backbone.MessagingEntities entities 
+	LEFT JOIN Backbone.MessagingTopicDetails topicDetails ON
+	entities.TypeName = pEntityType AND  entities.TypeValue = ANY (string_to_array(pEntityIdArray,','))
+	AND entities.Topic = topicDetails.Topic;
 END
 $$ LANGUAGE plpgsql;
 DROP PROCEDURE IF EXISTS Backbone.GetUserPreference;
@@ -797,6 +802,22 @@ BEGIN
 		RequestedValue
 	);
 	
+END
+$$ LANGUAGE plpgsql;DROP FUNCTION IF EXISTS Central.IsHostAuthorized;
+
+CREATE FUNCTION Central.IsHostAuthorized 
+(
+	IN pHostName VARCHAR(255)
+) 
+RETURNS BOOLEAN
+AS $$
+DECLARE
+  v_authorized BOOLEAN;
+BEGIN
+
+	SELECT EXISTS(SELECT 1 FROM Central.Hosts  WHERE hosts.HostName=pHostName) INTO v_authorized;
+
+	RETURN v_authorized;
 END
 $$ LANGUAGE plpgsql;--DIFFERENT ISSUE
 DROP FUNCTION IF EXISTS Central.ValidateDecryptRequest;
